@@ -26,14 +26,34 @@ except:
 
 os.chdir(cwd)
 
-shutil.copyfile("test_site/images/logo.jpg", "site/images/logo.jpg")
+image_files=[
+    "test_site/images/logo.jpg",
+    "test_site/images/info_pic1.jpg",
+    "test_site/images/info_pic2.jpg",
+    "test_site/images/prod1.jpg",
+    "test_site/images/prod2.jpg",
+    "test_site/images/prod3.jpg"
+]
+
+for file in image_files:
+    shutil.copy(file,"site/images")
+
+# shutil.copyfile("test_site/images/logo.jpg", "site/images/logo.jpg")
 
 template = env.get_template("index.html")
+
 output = template.render(
 content=content,
 logo='"images/logo.jpg"',
-biz_name="Super Calls"
+biz_name="Super Calls",
+info_pic1='"images/info_pic1.jpg"',
+info_pic2='"images/info_pic2.jpg"',
+prod1='"images/prod1.jpg"',
+prod2='"images/prod2.jpg"',
+prod3='"images/prod3.jpg"'
 )
+
+
 f = open("site/index.html", "w")
 f.write(output)
 f.close()
